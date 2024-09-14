@@ -18,4 +18,4 @@ ENV FLASK_APP=tviews.py
 ENV FLASK_ENV=production
 
 # Command to run your Python script
-CMD ["python", "tviews.py", "--mode", "auto", "--channel", "botio_devs", "--post", "330"]
+CMD ["python", "tviews.py", "--mode", "auto", "--channel", "botio_devs", "--post", "331"]

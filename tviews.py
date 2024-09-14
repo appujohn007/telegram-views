@@ -6,11 +6,22 @@ from re import compile
 from os import system, name
 from threading import Thread
 from time import sleep
+from flask import Flask
+
+# Flask app
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return "Hello, World!"
+
+def run_flask():
+    app.run(host="0.0.0.0", port=8080)
 
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 REGEX = compile(
-    r"(?:^|\D)?(("+ r"(?:[1-9]|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])"
+    r"(?:^|\D)?((" + r"(?:[1-9]|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])"
     + r"\." + r"(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])"
     + r"\." + r"(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])"
     + r"\." + r"(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])"
@@ -18,7 +29,6 @@ REGEX = compile(
     + r"|65[0-4]\d{2}|655[0-2]\d|6553[0-5])")
     + r")(?:\D|$)"
 )
-
 
 class Telegram:
     def __init__(self, channel: str, post: int) -> None:
@@ -189,6 +199,9 @@ parser.add_argument('-m', '--mode', dest='mode', help='Proxy mode', type=str, re
 parser.add_argument('-p', '--proxy', dest='proxy', help='Proxy file path or user:password@host:port', type=str, required=False)
 args = parser.parse_args()
 
+# Start the Flask app in a new thread
+Thread(target=run_flask).start()
+
 api = Telegram(args.channel, args.post)
 Thread(target=api.cli).start()
 
@@ -199,5 +212,6 @@ if args.mode[0] == "l":
 
 elif args.mode[0] == "r":  
     asyncio.run(api.run_rotated_task(args.proxy, args.type))
-    
-else: api.run_auto_tasks()
+
+else: 
+    api.run_auto_tasks()

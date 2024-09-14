@@ -16,7 +16,9 @@ EXPOSE 8080
 # Set environment variables for Flask (optional, if you want to run in production mode)
 ENV FLASK_APP=tviews.py
 ENV FLASK_ENV=production
-ENV TERM=xterm  # Set TERM environment variable
+
+# Set TERM environment variable
+ENV TERM=xterm
 
 # Command to run your Python script
 CMD ["python", "tviews.py", "--mode", "auto", "--channel", "botio_devs", "--post", "332"]

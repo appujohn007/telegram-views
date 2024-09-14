@@ -33,7 +33,7 @@ REGEX = compile(
 class Telegram:
     def __init__(self, channel: str, post: int) -> None:
         # Async Tasks
-        self.tasks = 50
+        self.tasks = 200
         
         self.channel = channel
         self.post = post

@@ -23,7 +23,7 @@ REGEX = compile(
 class Telegram:
     def __init__(self, channel: str, post: int) -> None:
         # Async Tasks
-        self.tasks = 225 
+        self.tasks = 50
         
         self.channel = channel
         self.post = post
@@ -49,7 +49,7 @@ class Telegram:
                     headers={
                         'referer': f'https://t.me/{self.channel}/{self.post}',
                         'user-agent': user_agent
-                    }, timeout=aiohttp.ClientTimeout(total=5)
+                    }, timeout=aiohttp.ClientTimeout(total=10)
                 ) as embed_response:
                     if jar.filter_cookies(embed_response.url).get('stel_ssid'):
                         views_token = search('data-view="([^"]+)"', await embed_response.text())

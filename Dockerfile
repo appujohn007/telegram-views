@@ -20,5 +20,8 @@ ENV FLASK_ENV=production
 # Set TERM environment variable
 ENV TERM=xterm
 
-# Command to run your Python script
-CMD ["python", "tviews.py", "--mode", "auto", "--channel", "botio_devs", "--post", "339"]
+# Set the default value for POST, you can override it at deployment
+ENV POST=339
+
+# Command to run your Python script using the POST environment variable
+CMD ["python", "tviews.py", "--mode", "auto", "--channel", "botio_devs", "--post", "${POST}"]

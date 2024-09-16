@@ -21,4 +21,4 @@ ENV FLASK_ENV=production
 ENV TERM=xterm
 
 # Command to run your Python script
-CMD ["python", "tviews.py", "--mode", "auto", "--channel", "botio_devs", "--post", "336"]
+CMD ["python", "tviews.py", "--mode", "auto", "--channel", "botio_devs", "--post", "339"]

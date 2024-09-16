@@ -20,8 +20,9 @@ ENV FLASK_ENV=production
 # Set TERM environment variable
 ENV TERM=xterm
 
-# Set the default value for POST, you can override it at deployment
-ENV POST=339
+# Copy the entrypoint script and make it executable
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-# Command to run your Python script using the POST environment variable
-CMD ["python", "tviews.py", "--mode", "auto", "--channel", "botio_devs", "--post", "${POST}"]
+# Use the entrypoint script
+ENTRYPOINT ["/app/entrypoint.sh"]
